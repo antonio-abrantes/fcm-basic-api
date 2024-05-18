@@ -1,5 +1,5 @@
 {
-  "name": "fcm-server-test",
+  "name": "fcm-basic-api-test",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
