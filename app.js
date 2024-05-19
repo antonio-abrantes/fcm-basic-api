@@ -1,6 +1,8 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const notificationRoutes = require("./routes/notificationRoutes");
+const authRoutes = require("./routes/authRoutes");
 const { PORT } = require("./config/constants");
 const { getAccessToken } = require("./services/tokenService");
 
@@ -22,8 +24,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// Use notification routes
+// Use routes
 app.use("/api", notificationRoutes);
+app.use("/api/auth", authRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");
