@@ -1,4 +1,4 @@
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 3000;
 const PROJECT_ID = "proj-flutterflow-01";
 const HOST = "fcm.googleapis.com";
 const PATH = "/v1/projects/" + PROJECT_ID + "/messages:send";

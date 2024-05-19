@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const notificationRoutes = require("./routes/notificationRoutes");
 const protectedRoutes = require('./routes/protectedRoutes');
+const apiInfoRoutes = require('./routes/apiInfoRoutes');
 const authRoutes = require("./routes/authRoutes");
 
 const { PORT } = require("./config/constants");
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 });
 
 // Use routes
+app.use('/', apiInfoRoutes);
 app.use("/api", notificationRoutes);
 app.use("/api/auth", authRoutes);
 app.use('/api/protected', protectedRoutes);
