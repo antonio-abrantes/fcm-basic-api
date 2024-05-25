@@ -131,8 +131,45 @@ router.post("/unsubscribe-to-topic", unsubscribeToTopic);
  *             type: object
  *             properties:
  *               message:
- *                 type: string
+ *                 type: object
  *                 description: Tipo de mensagem a ser enviada (common-message ou override-message)
+ *                 properties:
+ *                   topic:
+ *                      type: string
+ *                      description: Topico da notificação
+ *                   notification:
+ *                      type: object
+ *                      description: Corpo da notificação
+ *                      properties:
+ *                         title:
+ *                            type: string
+ *                            description: Titulo da notificação
+ *                         body:
+ *                            type: string
+ *                            description: Texto principal da notificação
+ *                         image:
+ *                            type: string
+ *                            description: Imagem da notificação
+ *                      required:
+ *                         - title
+ *                         - body
+ *                   data:
+ *                      type: object
+ *                      description: Metadados da notificação
+ *                      properties:
+ *                         category:
+ *                            type: string
+ *                            description: Categoria da notificação
+ *                         date:
+ *                            type: string
+ *                            description: Data da criação da notificação
+ *                         time:
+ *                            type: string
+ *                            description: Hora da criação da notificação
+ *                         isRead:
+ *                            type: string
+ *                            description: Flag que defini se a manesagem já foi lida
+ *                            
  *     responses:
  *       200:
  *         description: Mensagem enviada com sucesso usando Axios

@@ -8,6 +8,7 @@ services:
       - "3000:3000"
     networks:
       - app-network
+    restart: always
 
   nginx:
     image: nginx:latest
@@ -20,6 +21,7 @@ services:
       - app
     networks:
       - app-network
+    restart: always
 
 networks:
   app-network:
