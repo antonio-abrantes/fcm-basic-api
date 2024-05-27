@@ -31,7 +31,7 @@ const sendNotificationWithAxios = async (req, res) => {
   try {
     const { message } = req.body;
     if (message) {
-      const commonMessage = buildNotification(message);
+      const commonMessage = buildNotification(req.body);
       await sendFcmMessageWithAxios(commonMessage);
       res.status(200).json({
         success: true,

@@ -1,7 +1,10 @@
 const { v4: uuidv4 } = require('uuid');
 
 function buildNotification(reqBody) {
-  const { title, body } = reqBody.notification;
+
+  const {clientId, fcmToken } =  reqBody;
+
+  const { title, body, image } = reqBody.message.notification;
   if (!title || !body) {
     throw new Error("Os campos 'title' e 'body' são obrigatórios na notificação.");
   }
@@ -15,20 +18,43 @@ function buildNotification(reqBody) {
   const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth() + 1).toString().padStart(2, '0')}/${currentDate.getFullYear()}`;
   const formattedTime = `${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}:${currentDate.getSeconds().toString().padStart(2, '0')}`;
 
+  const { data } = reqBody.message
+
+  if(clientId || fcmToken) {
+    // Buscar token do clinte pelo id
+    return {
+      message: {
+        token: fcmToken,
+        notification: {
+          title: title,
+          body: body,
+          image: image || "https://via.placeholder.com/70"
+        },
+        data: {
+          messageId: messageId,
+          category: data.category || "Geral",
+          date: data.date || formattedDate,
+          time: data.time || formattedTime,
+          isRead: data.isRead !== undefined ? data.isRead : "false"
+        },
+      },
+    };
+  }
+
   return {
     message: {
       topic: finalTopic,
       notification: {
         title: title,
         body: body,
-        image: reqBody.notification.image || "https://via.placeholder.com/70"
+        image: image || "https://via.placeholder.com/70"
       },
       data: {
         messageId: messageId,
-        category: reqBody.data.category || "Geral",
-        date: reqBody.data.date || formattedDate,
-        time: reqBody.data.time || formattedTime,
-        isRead: reqBody.data.isRead !== undefined ? reqBody.data.isRead : "false"
+        category: data.category || "Geral",
+        date: data.date || formattedDate,
+        time: data.time || formattedTime,
+        isRead: data.isRead !== undefined ? data.isRead : "false"
       },
     },
   };

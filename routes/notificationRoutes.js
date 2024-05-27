@@ -130,9 +130,15 @@ router.post("/unsubscribe-to-topic", unsubscribeToTopic);
  *           schema:
  *             type: object
  *             properties:
+ *               clientId:
+ *                 type: string
+ *                 description: Id para terminar o cliente de uma notificação particular
+ *               fcmToken:
+ *                 type: string
+ *                 description: FCM Token para terminar o cliente de uma notificação particular
  *               message:
  *                 type: object
- *                 description: Tipo de mensagem a ser enviada (common-message ou override-message)
+ *                 description: Objeto com as principais propriedades da mensagem
  *                 properties:
  *                   topic:
  *                      type: string
